@@ -111,10 +111,19 @@ app.delete('/api/users/:id', (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
 // 1. Create a new book (POST request)
 app.post('/api/books', (req, res) => {
-	const { name, email } = req.body;
-	const sql = 'INSERT INTO users (name, email) VALUES (?, ?)';
+	const { id,name, description,price,note } = req.body;
+	const sql = 'INSERT INTO users (id,name, description,price,note) VALUES (?, ?)';
 
 	db.query(sql, [id, name,description,price,note], (err, result) => {
 		if (err) {
@@ -125,31 +134,37 @@ app.post('/api/books', (req, res) => {
 	});
 });
 
-// 2. Get all users (GET request)
+// 2. Get all books (GET request)
 app.get('/api/books', (req, res) => {
 	const sql = 'SELECT * FROM books';
 
-	db.query(sql, (err, result) => {
+	db.query(sql, (err, results) => {
 		if (err) {
-			res.status(500).json({ message: 'Error creating user', error: err });
+			res.status(500).json({ message: 'Error fetching users', error: err });
 		} else {
-			res.status(201).json({ message: 'User created', userId: result.insertId });
+			res.json(results);
+
 		}
 	});
 });
 
 
 
-// 3. Get a specific user by ID (GET request)
-app.get('/api/users/:id', (req, res) => {
-	const userId = req.params.id;
-	const sql = 'SELECT * FROM users WHERE id = ?';
 
-	db.query(sql, [id, name,discription,price,note], (err, result) => {
+// 3. Get a specific books by ID (GET request)
+
+
+app.get('/api/books/:id', (req, res) => {
+	const id = req.params.id;
+	const sql = 'SELECT * FROM books WHERE id = ?';
+
+	db.query(sql, [id], (err, results) => {
 		if (err) {
-			res.status(500).json({ message: 'Error creating user', error: err });
+			res.status(500).json({ message: 'Error fetching book', error: err });
+		} else if (results.length === 0) {
+			res.status(404).json({ message: 'Book not found' });
 		} else {
-			res.status(201).json({ message: 'User created', userId: result.insertId });
+			res.json(results[0]);
 		}
 	});
 });
