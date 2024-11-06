@@ -1,118 +1,112 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import 'react-native-gesture-handler';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Contacts from './src/Contact';
+import store from './src/Store';
+import Favorites from './src/Favorites';
+import ProfileContact from './src/ProfileContact';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const Stack = createStackNavigator();
+
+function ContactsScreens() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+    <Stack.Navigator
+      initialRouteName='Contacts'
+      screenOptions={{
+        headerShown: true
+      }
+      }
+    >
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+      <Stack.Screen
+        name='Contacts'
+        component={Contacts}
+        options={{ title: "Contacts" }}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+
+      <Stack.Screen
+        name='ProfileContact'
+        component={ProfileContact}
+        options={{ title: "Profile Contact" }}
+      />
+
+
+    </Stack.Navigator >
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function FavoriteScreens() {
+  return (
+    <Stack.Navigator
+      initialRouteName='Favorites'
+      screenOptions={{
+        headerShown: true
+      }}>
+      <Stack.Screen
+        name='Favorites'
+        component={Favorites}
+        options={{ title: "Favorites" }}
+      ></Stack.Screen>
+
+      <Stack.Screen
+        name='ProfileContact'
+        component={ProfileContact}
+        options={{ title: "Profile Contact" }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
+
+const Tab = createMaterialBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName='ContactsScreen'
+      barStyle={{ backgroundColor: "blue" }}
+      labeled={false}
+      activeColor={'greyLight'}
+      inactiveColor={'greyDark'}
+    >
+      <Tab.Screen
+        name='Contacts'
+        component={ContactsScreens}
+        options={{
+          tabBarIcon: 'format-list-bulletd'
+        }}
+      ></Tab.Screen>
+
+      <Tab.Screen
+        name='Favorites'
+        component={FavoriteScreens}
+        options={{
+          tabBarIcon: 'star-check'
+        }}
+      ></Tab.Screen>
+
+    </Tab.Navigator>
+  );
+}
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <TabNavigator></TabNavigator>
+      </NavigationContainer>
+
+    </Provider>
+  );
+}
 
 export default App;
+

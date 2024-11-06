@@ -14,7 +14,7 @@ export const mapContact = (contact) => {
 	};
 };
 
-const contactsSlide = createSilde({
+const contactsSlide = createSlice({
 	name: 'contact',
 	initalState: {
 		contact: [],

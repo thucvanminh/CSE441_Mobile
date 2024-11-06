@@ -51,3 +51,4 @@ const Contacts = ({ navigation }) => {
 	});
 
 }
+export default Contacts;

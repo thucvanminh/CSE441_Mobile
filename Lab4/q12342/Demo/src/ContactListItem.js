@@ -5,9 +5,8 @@ const ContactListItem = ({ name, avatar, phone, onPress }) => {
 
 	return (
 		<TouchableHighlight
-
 			underlayColor='grey'
-			style={StyleSheet.container}
+			style={styles.container}
 			onPress={onPress}>
 			<View style={StyleSheet.contactInfo}>
 				<Image source={{ uri: avatar }} style={styles.avatar}></Image>
@@ -42,8 +41,21 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 	},
-	details:{
+	details: {
 		justifyContent: 'center',
-		
+		flex: 1,
+		marginLeft: 25,
+	},
+	title: {
+		color: "black",
+		fontWeight: 'bold',
+		fontSize: 16,
+	},
+	subtitle: {
+		color: 'blue',
+		fontSize: 14,
+		marginTop: 4
 	}
 })
+
+export default ContactListItem;
