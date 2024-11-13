@@ -1,26 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
+import axios from 'axios';
+
+
+
 
 const Login = () => {
+
+	const [phone, setPhone] = useState("");
+	const [password, setPassword] = useState("");
+
+	function loginMethod(inphone, inpassword) {
+		let data = JSON.stringify({
+			"phone": inphone,
+			"password": inpassword
+		});
+
+		let config = {
+			method: 'post',
+			maxBodyLength: Infinity,
+			url: 'https://kami-backend-5rs0.onrender.com/auth',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: data
+		};
+
+		axios.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.loginHeader}>Login</Text>
-			
-			<TextInput 
-				style={styles.input} 
-				placeholder="Phone" 
-				keyboardType="phone-pad" 
+
+			<TextInput
+				style={styles.input}
+				placeholder="Phone"
+				keyboardType="phone-pad"
+				value={phone} // Hiển thị giá trị hiện tại của phone
+				onChangeText={setPhone} // Cập nhật giá trị của phone
 			/>
-			<TextInput 
-				style={styles.input} 
-				placeholder="Password" 
-				secureTextEntry={true} 
+			<TextInput
+				style={styles.input}
+				placeholder="Password"
+				secureTextEntry={true}
+				value={password} // Hiển thị giá trị hiện tại của phone
+				onChangeText={setPassword} // Cập nhật giá trị của phone
 			/>
-			
-			<TouchableOpacity 
-				style={styles.loginButton} 
+
+			<TouchableOpacity
+				style={styles.loginButton}
 				onPress={() => {
 					// Thêm hành động khi nhấn vào nút Login tại đây
+					loginMethod(phone, password);
 					console.log("Login button pressed");
 				}}
 			>
