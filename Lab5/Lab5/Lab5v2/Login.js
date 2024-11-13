@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -9,6 +10,7 @@ const Login = () => {
 
 	const [phone, setPhone] = useState("");
 	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
 
 	function loginMethod(inphone, inpassword) {
 		let data = JSON.stringify({
@@ -29,6 +31,8 @@ const Login = () => {
 		axios.request(config)
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
+
+
 			})
 			.catch((error) => {
 				console.log(error);
