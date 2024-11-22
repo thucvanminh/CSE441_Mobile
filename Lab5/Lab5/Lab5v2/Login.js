@@ -10,7 +10,10 @@ const Login = () => {
 
 	const [phone, setPhone] = useState("");
 	const [password, setPassword] = useState("");
+
+	
 	const dispatch = useDispatch();
+	const [Textresponse, setTextresponse] = useState("");
 
 	function loginMethod(inphone, inpassword) {
 		let data = JSON.stringify({
@@ -31,7 +34,12 @@ const Login = () => {
 		axios.request(config)
 			.then((response) => {
 				console.log(JSON.stringify(response.data));
+				if (response.data.token !== null) {
+					dispatch(setToken(response.data.token));
 
+				} else {
+					setTextresponse("Login Failed")
+				}
 
 			})
 			.catch((error) => {
@@ -66,10 +74,14 @@ const Login = () => {
 					// Thêm hành động khi nhấn vào nút Login tại đây
 					loginMethod(phone, password);
 					console.log("Login button pressed");
+
 				}}
 			>
 				<Text style={styles.loginButtonText}>Login</Text>
 			</TouchableOpacity>
+
+
+			<View><Text>{Textresponse}</Text></View>
 		</View>
 	);
 }
