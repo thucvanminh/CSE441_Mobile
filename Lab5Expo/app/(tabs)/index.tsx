@@ -3,17 +3,23 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-nativ
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
-export default function Index() {
-	const [phone, setPhone] = useState('');
-	const [password, setPassword] = useState('');
-	const [Textresponse, setTextresponse] = useState('');
 
+
+
+
+const Login = () => {
+
+	const [phone, setPhone] = useState("");
+	const [password, setPassword] = useState("");
+
+	
 	const dispatch = useDispatch();
+	const [Textresponse, setTextresponse] = useState("");
 
-	function loginMethod(loginPhone: string, loginPassword: string) {
+	function loginMethod(inphone: string, inpassword: string) {
 		let data = JSON.stringify({
-			"phone": loginPhone,
-			"password": loginPassword
+			"phone": inphone,
+			"password": inpassword
 		});
 
 		let config = {
@@ -23,8 +29,8 @@ export default function Index() {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			reponsedata: data
-		}
+			data: data
+		};
 
 		axios.request(config)
 			.then((response) => {
@@ -40,7 +46,7 @@ export default function Index() {
 			.catch((error) => {
 				console.log(error);
 			});
-	}
+	};
 
 
 
@@ -52,15 +58,15 @@ export default function Index() {
 				style={styles.input}
 				placeholder="Phone"
 				keyboardType="phone-pad"
-				onChangeText={setPhone}
-				value={phone}
+				value={phone} // Hiển thị giá trị hiện tại của phone
+				onChangeText={setPhone} // Cập nhật giá trị của phone
 			/>
 			<TextInput
 				style={styles.input}
 				placeholder="Password"
 				secureTextEntry={true}
-				onChangeText={setPassword}
-				value={password}
+				value={password} // Hiển thị giá trị hiện tại của phone
+				onChangeText={setPassword} // Cập nhật giá trị của phone
 			/>
 
 			<TouchableOpacity
@@ -72,11 +78,11 @@ export default function Index() {
 
 				}}
 			>
-				<Text style={styles.loginButtonText}>Login</Text>
+				<Text style={styles.loginButtonText}>Randoms</Text>
 			</TouchableOpacity>
 
-			<View><Text>{Textresponse}</Text></View>
 
+			<View><Text>{Textresponse}</Text></View>
 		</View>
 	);
 }
@@ -120,3 +126,5 @@ const styles = StyleSheet.create({
 		borderRadius: 100
 	},
 });
+
+export default Login;
