@@ -1,47 +1,88 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
 import axios from 'axios';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function Index() {
-  return (
-    <View style={styles.container}>
+	const [phone, setPhone] = useState('');
+	const [password, setPassword] = useState('');
+	const [Textresponse, setTextresponse] = useState('');
+
+	const dispatch = useDispatch();
+
+	function loginMethod(loginPhone: string, loginPassword: string) {
+		let data = JSON.stringify({
+			"phone": loginPhone,
+			"password": loginPassword
+		});
+
+		let config = {
+			method: 'post',
+			maxBodyLength: Infinity,
+			url: 'https://kami-backend-5rs0.onrender.com/auth',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			reponsedata: data
+		}
+
+		axios.request(config)
+			.then((response) => {
+				console.log(JSON.stringify(response.data));
+				if (response.data.token !== null) {
+					dispatch(setToken(response.data.token));
+
+				} else {
+					setTextresponse("Login Failed")
+				}
+
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+
+
+	return (
+		<View style={styles.container}>
 			<Text style={styles.loginHeader}>Login</Text>
 
 			<TextInput
 				style={styles.input}
 				placeholder="Phone"
 				keyboardType="phone-pad"
-				// value={phone} // Hiển thị giá trị hiện tại của phone
-				// onChangeText={setPhone} // Cập nhật giá trị của phone
+				onChangeText={setPhone}
+				value={phone}
 			/>
 			<TextInput
 				style={styles.input}
 				placeholder="Password"
 				secureTextEntry={true}
-				// value={password} // Hiển thị giá trị hiện tại của phone
-				// onChangeText={setPassword} // Cập nhật giá trị của phone
+				onChangeText={setPassword}
+				value={password}
 			/>
 
 			<TouchableOpacity
 				style={styles.loginButton}
 				onPress={() => {
 					// Thêm hành động khi nhấn vào nút Login tại đây
-					// loginMethod(phone, password);
+					loginMethod(phone, password);
 					console.log("Login button pressed");
 
 				}}
 			>
-        <Text style={styles.loginButtonText}>Login</Text>
+				<Text style={styles.loginButtonText}>Login</Text>
 			</TouchableOpacity>
 
+			<View><Text>{Textresponse}</Text></View>
 
 		</View>
-  );
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
+	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
