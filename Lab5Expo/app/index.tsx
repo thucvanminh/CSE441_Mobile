@@ -1,56 +1,54 @@
-import { View,SafeAreaView,TouchableOpacity } from 'react-native';
-import { StyleSheet, Image, Platform, Text,TextInput } from 'react-native';
+import { View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, Platform, Text, TextInput } from 'react-native';
 import React from 'react';
 
 
 
 
 export default function TabTwoScreen() {
-  return (
-    <SafeAreaView>
-      <View style={styles.container}>
-			<Text style={styles.loginHeader}>Login</Text>
+	return (
+		<SafeAreaView style={{ flex: 1 }}>
+			<View style={styles.container}>
+				<Text style={styles.loginHeader}>Login</Text>
 
-			<TextInput
-				style={styles.input}
-				placeholder="Phone"
-				keyboardType="phone-pad"
+				<TextInput
+					style={styles.input}
+					placeholder="Phone"
+					keyboardType="phone-pad"
 				// value={phone} // Hiển thị giá trị hiện tại của phone
 				// onChangeText={setPhone} // Cập nhật giá trị của phone
-			/>
-			<TextInput
-				style={styles.input}
-				placeholder="Password"
-				secureTextEntry={true}
+				/>
+				<TextInput
+					style={styles.input}
+					placeholder="Password"
+					secureTextEntry={true}
 				// value={password} // Hiển thị giá trị hiện tại của phone
 				// onChangeText={setPassword} // Cập nhật giá trị của phone
-			/>
+				/>
 
-			<TouchableOpacity
-				style={styles.loginButton}
-				onPress={() => {
-					// Thêm hành động khi nhấn vào nút Login tại đây
-					// loginMethod(phone, password);
-					console.log("Login button pressed");
+				<TouchableOpacity
+					style={styles.loginButton}
+					onPress={() => {
+						// Thêm hành động khi nhấn vào nút Login tại đây
+						// loginMethod(phone, password);
+						console.log("Login button pressed");
 
-				}}
-			>
-				<Text style={styles.loginButtonText}>Login</Text>
-			</TouchableOpacity>
+					}}
+				>
+					<Text style={styles.loginButtonText}>Login</Text>
+				</TouchableOpacity>
+			</View>
+		</SafeAreaView>
 
-
-			{/* <View><Text>{Textresponse}</Text></View> */}
-		</View>
-    </SafeAreaView>
-    // <Text>Hello World</Text>
-  );
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+	container: {
+		flex: 1, // Đảm bảo View chiếm toàn bộ màn hình
+		justifyContent: 'center', // Canh giữa theo chiều dọc
+		alignItems: 'center', // Canh giữa theo chiều ngang
+		backgroundColor: '#fff', // Màu nền (tuỳ chọn)
 	},
 	loginHeader: {
 		fontSize: 50,
@@ -82,6 +80,7 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 18,
 		fontWeight: 'bold',
-		borderRadius: 100
+		borderRadius: 100,
 	},
 });
+
