@@ -1,11 +1,15 @@
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { StyleSheet, Image, Platform, Text, TextInput } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 
 
 export default function TabTwoScreen() {
+	const [phone,setPhone] = useState('');
+	const [password,setPassword] = useState('');
+
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<View style={styles.container}>
