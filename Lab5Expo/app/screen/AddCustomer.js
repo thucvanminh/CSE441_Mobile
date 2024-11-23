@@ -4,14 +4,12 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const EditService =({route, navigation}) => {
-    const {service} = route.params;
-    const [newName, setNewName] = useState(service.name);
-    const [newPrice, setNewPice] = useState(String(service.price));
+const AddCustomer =({navigation}) => {
+    const [newName, setNewName] = useState('');
+    const [newPhone, setNewPhone] = useState('');
     // const {userInfo} = useContext(AuthContext);
-    // const loginToken = userInfo.token;
-    
-    const edit = async (id, newName, newPrice) => {
+    // const loginToken = userInfo.token;  
+    const funcAdd = async (newName, newPhone) => {
         const token = (await AsyncStorage.getItem('loginToken'))?.replace(/"/g, '');
         const config = {
             headers: {
@@ -19,41 +17,44 @@ const EditService =({route, navigation}) => {
             }
         };
         
-        axios.put(
-            "https://kami-backend-5rs0.onrender.com/services/" + id,
-            {id: id, name: newName, price: newPrice }, // Payload (request body)
+        await axios.post(
+            "https://kami-backend-5rs0.onrender.com/customers",
+            { name: newName, phone: newPhone }, // Payload (request body)
             config // Configuration (headers)
         )
         .then(res => {
-            Alert.alert("Updated successful","", [
+            console.log(res);
+            Alert.alert("Add successful","", [
                 {
                     text: "OK",
                     onPress: () => navigation.goBack()
                 }
             ])
         }).catch(e => {
+            console.log(loginToken);
             console.error("fetch error:" ,e);
         })
     }
 
     return(
         <SafeAreaView style = {styles.layout}>
-            <Text style = {styles.title}>Service name *</Text>
+            <Text style = {styles.title}>Customer name *</Text>
             <TextInput 
                 style = {styles.input}
+                placeholder="Input a customer name"
                 value={newName}
                 onChangeText={setNewName}
             />
-            <Text style = {styles.title}>Price *</Text>
+            <Text style = {styles.title}>Phone *</Text>
             <TextInput
                 style = {styles.input}
-                value={newPrice}
-                onChangeText={setNewPice}
+                value={newPhone}
+                onChangeText={setNewPhone}
             />
 
             <TouchableOpacity style={styles.button}
-                onPress= {() => edit(service._id, newName, newPrice)}>
-                <Text style={styles.buttonTitle}>Update</Text>
+                onPress= {() => funcAdd(newName, newPhone)}>
+                <Text style={styles.buttonTitle}>Add</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
@@ -97,4 +98,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default EditService;
+export default AddCustomer;

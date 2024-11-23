@@ -30,9 +30,7 @@ const LoginScreen = ({navigation}) => {
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                 />
-                {/* <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Icon name={showPassword ? "eye-off-outline" : "eye-outline"} size={20} color="gray" />
-                </TouchableOpacity> */}
+                
                 <TouchableOpacity style = {styles.button} onPress={() => {login(phone, password)}}>
                     <Text style = {styles.buttonTitle}>Login</Text>
                 </TouchableOpacity>
@@ -46,13 +44,18 @@ export default LoginScreen;
 const styles = StyleSheet.create({
     layout: {
         flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
         backgroundColor: '#FFF',
     },
 
     container: {
         flex: 1,
         alignItems: 'center',
-        padding: 48,
+        justifyContent: 'center',
+        paddingLeft: 48,
+        paddingRight: 48,
+        marginTop: -80
     },
 
     inputForm: {
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#E64E6A',
         marginBottom: 24,
-        marginTop: 72,
+        // marginTop: 72,
     },
 
     button: {

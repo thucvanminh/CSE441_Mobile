@@ -1,1 +1,4 @@
-random words stand for no reason
+npm install @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs react-native-safe-area-context react-native-screens react-native-gesture-handler react-native-reanimated
+npm install react-native-vector-icons react-native-paper react-native-popup-menu
+npm install axios
+expo install react-native-screens react-native-safe-area-context
