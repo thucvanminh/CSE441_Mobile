@@ -6,6 +6,7 @@ import { Alert } from "react-native";
 export const AuthContext = createContext();
 
 
+
 export const AuthProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState({});
     const [services, setServices] = useState([]);

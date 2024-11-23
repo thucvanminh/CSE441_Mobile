@@ -7,6 +7,7 @@ import Transaction from "../screen/Transaction";
 import Customer from "../screen/Customer";
 import Settings from "../screen/Setting";
 
+
 const MainNavigation = ({navigation}) =>{
     const Tab = createBottomTabNavigator();
 
