@@ -15,26 +15,26 @@ import { IconButton } from 'react-native-paper';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-    const {userInfo} = useContext(AuthContext);
-    
+    const { userInfo } = useContext(AuthContext);
+
     return (
-        <NavigationContainer>
-             <Stack.Navigator
-                screenOptions={({route})=>({
-                    headerStyle:{
-                        backgroundColor: "#E64E6A",
-                    },
-                    headerTintColor: "white",
-                    
-                })}
-             >
-                {userInfo.token ? 
-                    <>
-                        <Stack.Screen name="MainNavigation" component={MainNavigation} options={{headerShown: false}}/>
-                        <Stack.Screen name="Service" component={Service} options={{headerShown: false}}/>
-                        <Stack.Screen name="Add" component={AddService}/>
-                        <Stack.Screen name="Service detail" component={ServiceDetail} options={{headerShown: false}}/>
-                        {/* options={({navigation})=>({
+
+        <Stack.Navigator
+            screenOptions={({ route }) => ({
+                headerStyle: {
+                    backgroundColor: "#E64E6A",
+                },
+                headerTintColor: "white",
+
+            })}
+        >
+            {userInfo.token ?
+                <>
+                    <Stack.Screen name="MainNavigation" component={MainNavigation} options={{ headerShown: false }} />
+                    <Stack.Screen name="Service" component={Service} options={{ headerShown: false }} />
+                    <Stack.Screen name="Add" component={AddService} />
+                    <Stack.Screen name="Service detail" component={ServiceDetail} options={{ headerShown: false }} />
+                    {/* options={({navigation})=>({
                             headerTitle: "Service detail",
                             headerLeft: () => (
                                 <IconButton icon="arrow-left" style={{ marginLeft: -10, marginRight: 15 }} iconColor="white" size={24} onPress={()=>navigation.goBack()}/>
@@ -43,15 +43,15 @@ const Navigation = () => {
                                 <IconButton icon="dots-vertical" iconColor="white" size={24} onPress={() => Alert.alert("Menu here")}/>
                             )
                         })} */}
-                        <Stack.Screen name="Edit" component={EditService}/>
-                    </>
+                    <Stack.Screen name="Edit" component={EditService} />
+                </>
                 :
-                    <>
-                        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
-                    </>
-                }       
-             </Stack.Navigator>
-        </NavigationContainer>
+                <>
+                    <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+                </>
+            }
+        </Stack.Navigator>
+
     )
 }
 
