@@ -25,7 +25,7 @@ const App = () => {
   return (
     <MenuProvider>
       <AuthProvider>
-        {/* Only one NavigationContainer should be present in Navigation.js */}
+
         <Navigation />
       </AuthProvider>
     </MenuProvider>

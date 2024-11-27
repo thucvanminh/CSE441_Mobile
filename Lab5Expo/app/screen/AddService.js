@@ -1,32 +1,36 @@
 import React, { useContext, useState } from "react";
-import { Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { Alert, Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const AddService =() => {
+const AddService =({navigation}) => {
     const [newName, setNewName] = useState('');
     const [newPrice, setNewPice] = useState('0');
-    const {userInfo} = useContext(AuthContext);
-    const loginToken = userInfo.token;
-    
-    const funcAdd = (newName, newPrice, loginToken) => {
+    // const {userInfo} = useContext(AuthContext);
+    // const loginToken = userInfo.token;
+
+    const funcAdd = async (newName, newPrice) => {
+        const token = (await AsyncStorage.getItem('loginToken'))?.replace(/"/g, '');
         const config = {
             headers: {
-                Authorization: `Bearer ${loginToken}`
+                Authorization: `Bearer ${token}`,
             }
         };
-        
         axios.post(
             "https://kami-backend-5rs0.onrender.com/services",
             { name: newName, price: newPrice }, // Payload (request body)
             config // Configuration (headers)
         )
         .then(res => {
-            console.log(res);
-        }).catch(e => {
-            console.log(loginToken);
+            Alert.alert("Add successful","", [
+                {
+                    text: "OK",
+                    onPress: () => navigation.goBack()
+                }
+            ])
+        }).catch(e => {   
             console.error("fetch error:" ,e);
-            
         })
     }
 
@@ -47,7 +51,7 @@ const AddService =() => {
             />
 
             <TouchableOpacity style={styles.button}
-                onPress= {() => funcAdd(newName, newPrice, loginToken)}>
+                onPress= {() => funcAdd(newName, newPrice)}>
                 <Text style={styles.buttonTitle}>Add</Text>
             </TouchableOpacity>
         </SafeAreaView>

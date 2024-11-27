@@ -22,25 +22,10 @@ const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
     const {userInfo} = useContext(AuthContext);
-    // const [userInfo, setUserInfo] = useState('');
-    // const getUserInfo = async () =>{
-    //     try {
-    //         const storedData = await AsyncStorage.getItem('userInfo');
-    //         if (storedData) {
-    //             const parsedData = JSON.parse(storedData);
-    //             setUserInfo(parsedData);
-    //             console.log("getUserInfo successful:", parsedData.token)
-    //             return parsedData;
-    //         } else {
-    //             console.log("parsedData is null");
-    //         }
-    //     } catch (error) {
-    //       console.log("Error when load userinfo: ", error);
-    //     }
-    // }
+  
     
     return (
-        <NavigationContainer>
+
              <Stack.Navigator
                 screenOptions={({route})=>({
                     headerStyle:{
@@ -60,7 +45,7 @@ const Navigation = () => {
                     </>
                 }       
              </Stack.Navigator>
-        </NavigationContainer>
+ 
     )
 }
 
