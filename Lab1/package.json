@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "react-native": "^0.79.1"
+  }
+}
