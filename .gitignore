@@ -1,0 +1,47 @@
+# Node modules
+**/node_modules/
+
+
+# Logs
+*.log
+npm-debug.log*
+
+# Metro bundler cache
+.metro/
+.cache/
+
+# React Native packager
+*.packager.js
+
+# Watchman
+.watchmanconfig
+
+# iOS build
+ios/Pods/
+ios/build/
+ios/DerivedData/
+
+# Android build
+android/.gradle/
+android/app/build/
+android/build/
+
+# Gradle files
+*.iml
+.gradle/
+local.properties
+
+# Misc
+.expo/
+*.swp
+*.idea/
+*.vscode/
+*.DS_Store
+
+# Environment files
+.env
+.env.*
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
