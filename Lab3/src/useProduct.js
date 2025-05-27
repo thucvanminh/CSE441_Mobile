@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useProducts = () => {
   const [originProducts, setProducts] = useState([]);
-  const [error, setError] = useState(null);
+  const [errors, setError] = useState(null);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
@@ -15,7 +15,7 @@ const useProducts = () => {
       });
   }, []);
 
-  return { originProducts, error };
+  return { originProducts, errors };
 };
 
 export default useProducts;

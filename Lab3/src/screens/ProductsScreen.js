@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import {ActivityIndicator, FlatList, View} from 'react-native';
 import { Text, Card, Button, Title } from 'react-native-paper';
 import useProducts from '../useProduct';
 
 
 
 const ProductsScreen = () => {
-  const { originProducts, error } = useProducts();
+  const { originProducts, errors } = useProducts();
+
 
   const renderItem = ({ item }) => (
     <Card style={{ marginBottom: 15 }}>

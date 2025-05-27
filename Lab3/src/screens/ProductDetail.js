@@ -4,8 +4,8 @@ import {Text, Card, Button, Title} from 'react-native-paper';
 import useProducts from '../useProduct';
 
 const SearchScreen = () => {
-  const {products : originProducts} = useProducts();
-  const {products,setProducts} = useProducts();
+  const {originProducts ,errors} = useProducts();
+
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState('');
   let filePath = 'https://dummyjson.com/products/';
@@ -25,9 +25,10 @@ const SearchScreen = () => {
         <Text>Category: {item.category}</Text>
       </Card.Content>
       <Card.Actions>
-        <Button>Detail</Button>
-        <Button>Add</Button>
+
         <Button>Delete</Button>
+
+        <Button>Cancel</Button>
       </Card.Actions>
     </Card>
   );
