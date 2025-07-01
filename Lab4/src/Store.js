@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import {createSlice, configureStore} from '@reduxjs/toolkit';
 import {v4} from 'uuid';
 
@@ -27,8 +28,8 @@ const contactsSlice = createSlice({
 });
 
 export const {fetchContactsSuccess} = contactsSlice.actions;
-const store = configureStore({
+const Store = configureStore({
   reducer: contactsSlice.reducer,
 });
 
-export default store;
+export default Store;
